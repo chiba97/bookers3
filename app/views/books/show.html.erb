@@ -35,6 +35,8 @@
             </td>
             <% end %>
             
+            <td>コメント数: <%= @book.book_comments.count %></td>
+            
             <% if current_user.id == @book.user_id %>
               <td>
                 <%=link_to "Edit", edit_book_path(@book.id),class: "btn btn-sm btn-success" %>
@@ -44,6 +46,13 @@
               </td>
             <% end %>
           </tr>
+          <div>
+            <%= form_with (model:[@book,@book_comment],local: true) do |f| %>
+              <%= f.text_area :comment %>
+              <%= f.submit "送信" %>
+          <% end %>
+          </div>
+          
         </tbody>
       </table>
     </div>
